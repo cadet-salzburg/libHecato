@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="libHecato" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug - Linux">
+				<Option output="../../lib/HecatoD" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="../../obj/Debug/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release - Linux">
+				<Option output="../../lib/Hecato" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="../../obj/Release/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-Wno-unknown-pragmas" />
+			<Add option="-Wno-reorder" />
+			<Add option="-Wno-unused-but-set-variable" />
+			<Add directory="/usr/include/opencv2" />
+			<Add directory="/usr/include/ni" />
+			<Add directory="../../src" />
+			<Add directory="../../src/blobslib" />
+			<Add directory="../../src/network" />
+			<Add directory="../../include" />
+			<Add directory="../../../../external/TUIO-1.4" />
+			<Add directory="../../../../external/TUIO-1.4/oscpack" />
+		</Compiler>
+		<Linker>
+			<Add option="`pkg-config opencv --libs`" />
+			<Add library="OpenNI" />
+			<Add library="../../../../external/TUIO-1.4/libTUIO.a" />
+		</Linker>
+		<Unit filename="../../include/HTBarrier.h" />
+		<Unit filename="../../include/HTBlobInterpreter.h" />
+		<Unit filename="../../include/HTBlobInterpreterMulti.h" />
+		<Unit filename="../../include/HTDevice.h" />
+		<Unit filename="../../include/HTDeviceThreaded.h" />
+		<Unit filename="../../include/HTIBlobResultTarget.h" />
+		<Unit filename="../../include/HTKalmanFilter.h" />
+		<Unit filename="../../include/HTMutex.h" />
+		<Unit filename="../../include/HTNetworkReceiver.h" />
+		<Unit filename="../../include/HTNetworkSender.h" />
+		<Unit filename="../../include/HTTUIOServer.h" />
+		<Unit filename="../../include/HTThread.h" />
+		<Unit filename="../../src/HTBarrier.cpp" />
+		<Unit filename="../../src/HTBlobInterpreter.cpp" />
+		<Unit filename="../../src/HTBlobInterpreterMulti.cpp" />
+		<Unit filename="../../src/HTDevice.cpp" />
+		<Unit filename="../../src/HTDeviceThreaded.cpp" />
+		<Unit filename="../../src/HTKalmanFilter.cpp" />
+		<Unit filename="../../src/HTMutex.cpp" />
+		<Unit filename="../../src/HTNetworkReceiver.cpp" />
+		<Unit filename="../../src/HTNetworkSender.cpp" />
+		<Unit filename="../../src/HTTUIOServer.cpp" />
+		<Unit filename="../../src/HTThread.cpp" />
+		<Unit filename="../../src/blobslib/Blob.cpp" />
+		<Unit filename="../../src/blobslib/Blob.h" />
+		<Unit filename="../../src/blobslib/BlobExtraction.cpp" />
+		<Unit filename="../../src/blobslib/BlobExtraction.h" />
+		<Unit filename="../../src/blobslib/BlobLibraryConfiguration.h" />
+		<Unit filename="../../src/blobslib/BlobResult.cpp" />
+		<Unit filename="../../src/blobslib/BlobResult.h" />
+		<Unit filename="../../src/network/UDPManager.cpp" />
+		<Unit filename="../../src/network/UDPManager.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
+			<AutoVersioning>
+				<Scheme minor_max="10" build_max="100" rev_max="100" rev_rand_max="10" build_times_to_increment_minor="100" />
+				<Settings autoincrement="1" date_declarations="1" update_manifest="1" do_auto_increment="1" ask_to_increment="0" language="C++" svn="0" svn_directory="" header_path="version.h" />
+				<Changes_Log show_changes_editor="0" app_title="released version %M.%m.%b of %p" changeslog_path="ChangesLog.txt" />
+				<Code header_guard="VERSION_H" namespace="AutoVersion" prefix="" />
+			</AutoVersioning>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

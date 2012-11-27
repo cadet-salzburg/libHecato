@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libHecatoTouch", "libHecatoTouch.vcxproj", "{841FB8AF-762F-4D9E-A8D6-530E310A5843}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HecatoTouchCalibration", "HecatoTouchCalibration.vcxproj", "{4A418064-C81B-43FC-A820-D4107B35A336}"
+	ProjectSection(ProjectDependencies) = postProject
+		{841FB8AF-762F-4D9E-A8D6-530E310A5843} = {841FB8AF-762F-4D9E-A8D6-530E310A5843}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HecatoTouchApp", "HecatoTouchApp.vcxproj", "{3D5737A6-D887-4C05-A465-5E3E715D5AAF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{841FB8AF-762F-4D9E-A8D6-530E310A5843} = {841FB8AF-762F-4D9E-A8D6-530E310A5843}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{841FB8AF-762F-4D9E-A8D6-530E310A5843}.Debug|Win32.ActiveCfg = Debug|Win32
+		{841FB8AF-762F-4D9E-A8D6-530E310A5843}.Debug|Win32.Build.0 = Debug|Win32
+		{841FB8AF-762F-4D9E-A8D6-530E310A5843}.Release|Win32.ActiveCfg = Release|Win32
+		{841FB8AF-762F-4D9E-A8D6-530E310A5843}.Release|Win32.Build.0 = Release|Win32
+		{4A418064-C81B-43FC-A820-D4107B35A336}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4A418064-C81B-43FC-A820-D4107B35A336}.Debug|Win32.Build.0 = Debug|Win32
+		{4A418064-C81B-43FC-A820-D4107B35A336}.Release|Win32.ActiveCfg = Release|Win32
+		{4A418064-C81B-43FC-A820-D4107B35A336}.Release|Win32.Build.0 = Release|Win32
+		{3D5737A6-D887-4C05-A465-5E3E715D5AAF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3D5737A6-D887-4C05-A465-5E3E715D5AAF}.Debug|Win32.Build.0 = Debug|Win32
+		{3D5737A6-D887-4C05-A465-5E3E715D5AAF}.Release|Win32.ActiveCfg = Release|Win32
+		{3D5737A6-D887-4C05-A465-5E3E715D5AAF}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

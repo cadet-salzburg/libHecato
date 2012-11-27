@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<appsettings>
+    <tuioserver on="1" host="127.0.0.1" port="3333"/>
+    <trackingmargin left="0.01f" right="0.99f"/>
+    <sender on="0" host="127.0.0.1" port="1234"/>
+    <receiver on="0" port="1337"/>
+    <!-- if fps off, app uses vsync, else delay in ms between frames. Needed as some KVM setups seem to screw up vsync -->
+    <fps on="0" delay="20"/>
+    <correlation width="0.08f" height="0.25f"/>
+    <radius click="0.f" drag="0.05f"/>
+    <persontracking on="0" corr="0.25f"/>
+</appsettings>

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\blobslib\Blob.cpp" />
+    <ClCompile Include="..\..\src\blobslib\BlobExtraction.cpp" />
+    <ClCompile Include="..\..\src\blobslib\BlobResult.cpp" />
+    <ClCompile Include="..\..\src\HTBarrier.cpp" />
+    <ClCompile Include="..\..\src\HTBlobInterpreter.cpp" />
+    <ClCompile Include="..\..\src\HTBlobInterpreterMulti.cpp" />
+    <ClCompile Include="..\..\src\HTDevice.cpp" />
+    <ClCompile Include="..\..\src\HTDeviceThreaded.cpp" />
+    <ClCompile Include="..\..\src\HTKalmanFilter.cpp" />
+    <ClCompile Include="..\..\src\HTMutex.cpp" />
+    <ClCompile Include="..\..\src\HTNetworkReceiver.cpp" />
+    <ClCompile Include="..\..\src\HTNetworkSender.cpp" />
+    <ClCompile Include="..\..\src\HTThread.cpp" />
+    <ClCompile Include="..\..\src\HTTUIOServer.cpp" />
+    <ClCompile Include="..\..\src\network\UDPManager.cpp" />
+    <ClCompile Include="..\..\src\win32\getopt.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\HTBarrier.h" />
+    <ClInclude Include="..\..\include\HTBlobInterpreter.h" />
+    <ClInclude Include="..\..\include\HTBlobInterpreterMulti.h" />
+    <ClInclude Include="..\..\include\HTDevice.h" />
+    <ClInclude Include="..\..\include\HTDeviceThreaded.h" />
+    <ClInclude Include="..\..\include\HTIBlobResultTarget.h" />
+    <ClInclude Include="..\..\include\HTKalmanFilter.h" />
+    <ClInclude Include="..\..\include\HTMutex.h" />
+    <ClInclude Include="..\..\include\HTNetworkReceiver.h" />
+    <ClInclude Include="..\..\include\HTNetworkSender.h" />
+    <ClInclude Include="..\..\include\HTThread.h" />
+    <ClInclude Include="..\..\include\HTTUIOServer.h" />
+    <ClInclude Include="..\..\src\blobslib\Blob.h" />
+    <ClInclude Include="..\..\src\blobslib\BlobExtraction.h" />
+    <ClInclude Include="..\..\src\blobslib\BlobLibraryConfiguration.h" />
+    <ClInclude Include="..\..\src\blobslib\BlobResult.h" />
+    <ClInclude Include="..\..\src\network\InetAddr.h" />
+    <ClInclude Include="..\..\src\network\UDPManager.h" />
+    <ClInclude Include="..\..\src\win32\getopt.h" />
+    <ClInclude Include="..\..\src\win32\unistd.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{841FB8AF-762F-4D9E-A8D6-530E310A5843}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>libHecatoTouch</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>$(ProjectName)d</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>TIXML_USE_STL;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(_2REAL_DEPENDENCIES_DIR)\OpenCV\include\opencv2;$(_2REAL_DEPENDENCIES_DIR)\OpenNI\include;$(_2REAL_DEPENDENCIES_DIR)\TUIO-1.4;..\..\include;$(_2REAL_DEPENDENCIES_DIR)\OpenCV\include\;$(_2REAL_DEPENDENCIES_DIR)\tinyxml;..\..\src\blobslib;..\..\src\win32;$(_2REAL_DEPENDENCIES_DIR)\TUIO-1.4\oscpack;..\..\src\network;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>libTUIOd.lib;tinyxmlSTLd.lib;openNI.lib;opencv_highgui242d.lib;opencv_core242d.lib;opencv_features2d242d.lib;opencv_imgproc242d.lib;opencv_objdetect242d.lib;opencv_video242d.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(_2REAL_DEPENDENCIES_DIR)\OpenCV\lib\vc10\lib;$(_2REAL_DEPENDENCIES_DIR)\OpenNI\lib;$(_2REAL_DEPENDENCIES_DIR)\tinyxml\lib;$(_2REAL_DEPENDENCIES_DIR)\TUIO-1.4\lib</AdditionalLibraryDirectories>
+      <OutputFile>..\..\lib\win32\$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>TIXML_USE_STL;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(_2REAL_DEPENDENCIES_DIR)\OpenCV\include\opencv2;$(_2REAL_DEPENDENCIES_DIR)\OpenNI\include;$(_2REAL_DEPENDENCIES_DIR)\TUIO-1.4;..\..\include;$(_2REAL_DEPENDENCIES_DIR)\OpenCV\include\;$(_2REAL_DEPENDENCIES_DIR)\tinyxml;..\..\src\blobslib;..\..\src\win32;$(_2REAL_DEPENDENCIES_DIR)\TUIO-1.4\oscpack;..\..\src\network;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>libTUIO.lib;tinyxmlSTL.lib;openNI.lib;opencv_highgui242.lib;opencv_core242.lib;opencv_features2d242.lib;opencv_imgproc242.lib;opencv_objdetect242.lib;opencv_video242.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(_2REAL_DEPENDENCIES_DIR)\OpenCV\lib\vc10\lib;$(_2REAL_DEPENDENCIES_DIR)\OpenNI\lib;$(_2REAL_DEPENDENCIES_DIR)\tinyxml\lib;$(_2REAL_DEPENDENCIES_DIR)\TUIO-1.4\lib</AdditionalLibraryDirectories>
+      <OutputFile>..\..\lib\win32\$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

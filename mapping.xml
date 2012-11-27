@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<mappings>
+    <mapping bus="1" id="0"/>
+    <mapping bus="2" id="1"/>
+    <mapping bus="3" id="2"/>
+    <mapping bus="4" id="3"/>
+</mappings>

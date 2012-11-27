@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<opencv_storage>
+<thresh>18</thresh>
+<blob>150</blob>
+<uBound>445</uBound>
+<lBound>25</lBound>
+<usePersonTracking>0</usePersonTracking>
+<uBoundPerson>180</uBoundPerson>
+<lBoundPerson>210</lBoundPerson>
+<lftBoundPerson>0</lftBoundPerson>
+<wdhBoundPerson>640</wdhBoundPerson>
+<c0x>572</c0x>
+<c0y>485</c0y>
+<c0z>1060</c0z>
+<c1x>96</c1x>
+<c1y>475</c1y>
+<c1z>1044</c1z>
+<c2x>484</c2x>
+<c2y>470</c2y>
+<c2z>1696</c2z>
+<c3x>175</c3x>
+<c3y>477</c3y>
+<c3z>1647</c3z>
+</opencv_storage>
