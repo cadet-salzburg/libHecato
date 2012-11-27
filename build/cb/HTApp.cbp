@@ -46,7 +46,7 @@
 			<Add library="OpenNI" />
 			<Add library="libtinyxml.a" />
 			<Add library="pthread" />
-			<Add library="../../../../external/TUIO-1.4/libTUIO.a" />
+			<Add library="../../external/TUIO-1.4/libTUIO.a" />
 			<Add library="opencv_core" />
 			<Add library="opencv_imgproc" />
 			<Add library="opencv_highgui" />

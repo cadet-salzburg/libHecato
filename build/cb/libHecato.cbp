@@ -41,13 +41,13 @@
 			<Add directory="../../src/blobslib" />
 			<Add directory="../../src/network" />
 			<Add directory="../../include" />
-			<Add directory="../../../../external/TUIO-1.4" />
-			<Add directory="../../../../external/TUIO-1.4/oscpack" />
+			<Add directory="../../external/TUIO-1.4" />
+			<Add directory="../../external/TUIO-1.4/oscpack" />
 		</Compiler>
 		<Linker>
 			<Add option="`pkg-config opencv --libs`" />
 			<Add library="OpenNI" />
-			<Add library="../../../../external/TUIO-1.4/libTUIO.a" />
+			<Add library="../../external/TUIO-1.4/libTUIO.a" />
 		</Linker>
 		<Unit filename="../../include/HTBarrier.h" />
 		<Unit filename="../../include/HTBlobInterpreter.h" />

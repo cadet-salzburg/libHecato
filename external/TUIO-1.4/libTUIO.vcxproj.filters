@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\oscpack">
+      <UniqueIdentifier>{55005e2a-b6a9-4d32-b3c5-3d980c0dccfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TUIO">
+      <UniqueIdentifier>{c95a252c-68f8-48bd-9432-2b813d3b6b5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\oscpack">
+      <UniqueIdentifier>{4b625049-7551-4a79-aa45-08a9c6968c79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TUIO">
+      <UniqueIdentifier>{85701326-f277-4ea4-bb7d-f9305fa8d68d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="oscpack\ip\win32\NetworkingUtils.cpp">
+      <Filter>Source Files\oscpack</Filter>
+    </ClCompile>
+    <ClCompile Include="oscpack\osc\OscOutboundPacketStream.cpp">
+      <Filter>Source Files\oscpack</Filter>
+    </ClCompile>
+    <ClCompile Include="oscpack\osc\OscPrintReceivedElements.cpp">
+      <Filter>Source Files\oscpack</Filter>
+    </ClCompile>
+    <ClCompile Include="oscpack\osc\OscReceivedElements.cpp">
+      <Filter>Source Files\oscpack</Filter>
+    </ClCompile>
+    <ClCompile Include="oscpack\osc\OscTypes.cpp">
+      <Filter>Source Files\oscpack</Filter>
+    </ClCompile>
+    <ClCompile Include="oscpack\ip\win32\UdpSocket.cpp">
+      <Filter>Source Files\oscpack</Filter>
+    </ClCompile>
+    <ClCompile Include="TUIO\TuioClient.cpp">
+      <Filter>Source Files\TUIO</Filter>
+    </ClCompile>
+    <ClCompile Include="TUIO\TuioServer.cpp">
+      <Filter>Source Files\TUIO</Filter>
+    </ClCompile>
+    <ClCompile Include="TUIO\TuioTime.cpp">
+      <Filter>Source Files\TUIO</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="oscpack\ip\NetworkingUtils.h">
+      <Filter>Header Files\oscpack</Filter>
+    </ClInclude>
+    <ClInclude Include="oscpack\osc\OscException.h">
+      <Filter>Header Files\oscpack</Filter>
+    </ClInclude>
+    <ClInclude Include="oscpack\osc\OscHostEndianness.h">
+      <Filter>Header Files\oscpack</Filter>
+    </ClInclude>
+    <ClInclude Include="oscpack\osc\OscOutboundPacketStream.h">
+      <Filter>Header Files\oscpack</Filter>
+    </ClInclude>
+    <ClInclude Include="oscpack\osc\OscPacketListener.h">
+      <Filter>Header Files\oscpack</Filter>
+    </ClInclude>
+    <ClInclude Include="oscpack\osc\OscTypes.h">
+      <Filter>Header Files\oscpack</Filter>
+    </ClInclude>
+    <ClInclude Include="oscpack\ip\PacketListener.h">
+      <Filter>Header Files\oscpack</Filter>
+    </ClInclude>
+    <ClInclude Include="oscpack\ip\TimerListener.h">
+      <Filter>Header Files\oscpack</Filter>
+    </ClInclude>
+    <ClInclude Include="oscpack\ip\UdpSocket.h">
+      <Filter>Header Files\oscpack</Filter>
+    </ClInclude>
+    <ClInclude Include="TUIO\TuioClient.h">
+      <Filter>Header Files\TUIO</Filter>
+    </ClInclude>
+    <ClInclude Include="TUIO\TuioContainer.h">
+      <Filter>Header Files\TUIO</Filter>
+    </ClInclude>
+    <ClInclude Include="TUIO\TuioCursor.h">
+      <Filter>Header Files\TUIO</Filter>
+    </ClInclude>
+    <ClInclude Include="TUIO\TuioListener.h">
+      <Filter>Header Files\TUIO</Filter>
+    </ClInclude>
+    <ClInclude Include="TUIO\TuioObject.h">
+      <Filter>Header Files\TUIO</Filter>
+    </ClInclude>
+    <ClInclude Include="TUIO\TuioPoint.h">
+      <Filter>Header Files\TUIO</Filter>
+    </ClInclude>
+    <ClInclude Include="TUIO\TuioServer.h">
+      <Filter>Header Files\TUIO</Filter>
+    </ClInclude>
+    <ClInclude Include="TUIO\TuioTime.h">
+      <Filter>Header Files\TUIO</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
