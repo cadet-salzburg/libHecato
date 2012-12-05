@@ -52,6 +52,7 @@
 		<Unit filename="../../include/HTBarrier.h" />
 		<Unit filename="../../include/HTBlobInterpreter.h" />
 		<Unit filename="../../include/HTBlobInterpreterMulti.h" />
+		<Unit filename="../../include/HTContext.h" />
 		<Unit filename="../../include/HTDevice.h" />
 		<Unit filename="../../include/HTDeviceThreaded.h" />
 		<Unit filename="../../include/HTIBlobResultTarget.h" />
@@ -64,6 +65,7 @@
 		<Unit filename="../../src/HTBarrier.cpp" />
 		<Unit filename="../../src/HTBlobInterpreter.cpp" />
 		<Unit filename="../../src/HTBlobInterpreterMulti.cpp" />
+		<Unit filename="../../src/HTContext.cpp" />
 		<Unit filename="../../src/HTDevice.cpp" />
 		<Unit filename="../../src/HTDeviceThreaded.cpp" />
 		<Unit filename="../../src/HTKalmanFilter.cpp" />
@@ -81,6 +83,7 @@
 		<Unit filename="../../src/blobslib/BlobResult.h" />
 		<Unit filename="../../src/network/UDPManager.cpp" />
 		<Unit filename="../../src/network/UDPManager.h" />
+		<Unit filename="version.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

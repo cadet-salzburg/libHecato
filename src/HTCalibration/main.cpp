@@ -1,6 +1,7 @@
 //#include <sys/time.h>
+#include <stdio.h>
 #include <highgui/highgui.hpp>
-#include <XnCppWrapper.h>
+#include "HTContext.h"
 #include "HTDeviceThreaded.h"
 
 
@@ -13,7 +14,6 @@ struct HTWindow
 	char windowName[16];
 };
 std::vector<HTWindow> htwindows;
-xn::Context ctx;
 
 int main()
 {
@@ -21,83 +21,31 @@ int main()
 	bool showThresh = false;
 	int key = 0;
 	int activeWindow = -1;
-	xn::NodeInfoList devices;
-	xn::NodeInfoList sensors;
+	//first we need to initialize the context:
+	HTContext::initialize();
 
-	std::map<int, int> mappings;
-	HTDevice::getBusMappings("../mapping.xml", mappings);
+	//get the devices:
+	const std::vector<HTDeviceThreaded*>& devs = HTContext::getDevices();
 
-	ctx.Init();
-	int numDevs = 0;
-	XnStatus status = ctx.EnumerateProductionTrees(XN_NODE_TYPE_DEVICE, NULL, devices);
-	if (status != XN_STATUS_OK || (devices.Begin() == devices.End()))
-	{
-		printf("HTCALIBRATION: Enumeration of devices failed. Quitting.\n");
-		exit(0);
-	}
-	int id = -1;
-	for (xn::NodeInfoList::Iterator iter = devices.Begin(); iter != devices.End(); ++iter, ++numDevs)
-	{
-		unsigned char bus = 0;
-		unsigned short vendor_id;
-		unsigned short product_id;
-		unsigned char address;
-		sscanf ((*iter).GetCreationInfo(), "%hx/%hx@%hhu/%hhu", &vendor_id, &product_id, &bus, &address);
-		printf("VENDOR: %x, PRODUCTID: %x, connected %i @ %i\n", vendor_id, product_id, bus, address);
-
-		//use only xTion cameras:
-		if ((vendor_id != 0x1d27 || product_id != 0x600) && (vendor_id != 0x45e || product_id != 0x2ae))
-		{
-			printf("HTCALIBRATION: No entry for this device!\n");
-			continue;
-		}
-
-
-		xn::NodeInfo deviceInfo = *iter;
-		xn::DepthGenerator* depthGen = new xn::DepthGenerator();
-		xn::Query q;
-		//create a production tree that's dependent on the current device
-		ctx.CreateProductionTree(deviceInfo);
-		q.AddNeededNode(deviceInfo.GetInstanceName());
-		ctx.CreateAnyProductionTree(XN_NODE_TYPE_DEPTH, &q, *depthGen);
-		//find the id matching the bus the device is connected to
-		std::map<int, int>::iterator mapIter = mappings.find(bus);
-		if (mapIter == mappings.end())
-		{
-			printf("WARNING: No entry for bus %i found!\n", bus);
-			id++;
-		}
-		else
-		{
-			id = mapIter->second;
-		}
-
-		printf("BUS IS: %i, put it as id: %i\n", bus, id);
-		HTDeviceThreaded* k = new HTDeviceThreaded(depthGen, id);
-
+	for (unsigned int i = 0; i < devs.size(); i++)
+    {
 		char suffix[16];
-		sprintf(suffix, "%d", id);
+		sprintf(suffix, "%d", devs[i]->getID());
 		std::string winName = "HTCALIBRATION";
 		winName += suffix;
 		HTWindow htw;
-		htw.htt = k;
+		htw.htt = devs[i];
 		memcpy(htw.windowName, winName.c_str(), 16);
 		htwindows.push_back(htw);
-		printf("HTCALIBRATION: Adding Device %i to production.\n", numDevs);
 		cvNamedWindow(htw.windowName);
 	}
 
 	HTDeviceThreaded *curHTT = 0;
 	while (key != 27)
 	{
-		ctx.WaitAndUpdateAll();
+		HTContext::updateAll();
 		const unsigned int len = htwindows.size();
-		//first step: compute next frame
-		for (unsigned i = 0; i < len; i++)
-		{
-			//this activates the threads waiting at their barriers
-			htwindows[i].htt->compute();
-		}
+
 		//second step: show the frame
 		for (unsigned i = 0; i < len; i++)
 		{
@@ -109,6 +57,9 @@ int main()
 			cur->htt->unlockCurrentImage();
 
 		}
+
+
+		//=== WINDOW HANDLING ===
 
 		key = (cvWaitKey(1) & 255);
 
@@ -177,11 +128,10 @@ int main()
 			}
 		}
 	}
-	for (unsigned i = 0; i < htwindows.size(); i++)
-	{
-		delete htwindows[i].htt;
-	}
+
 	htwindows.clear();
+
+	HTContext::shutdown();
 
 	return 0;
 }

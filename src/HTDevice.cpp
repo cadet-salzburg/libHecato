@@ -7,8 +7,6 @@
 #include "HTDevice.h"
 #include "HTBlobInterpreter.h"
 
-#include "../version.h"
-
 #undef USE_CONVERSION
 
 #define RES_X 640
@@ -38,7 +36,6 @@ HTDevice::HTDevice(xn::DepthGenerator* _generator, int _id) : roi(cvRect(0, 0, R
 	usePersonTracking(false)
 
 {
-	printf("LIBHECATO: v%s%s, BUILD: %li (%s-%s-%s)\n", AutoVersion::FULLVERSION_STRING, AutoVersion::STATUS_SHORT, AutoVersion::BUILDS_COUNT, AutoVersion::YEAR, AutoVersion::MONTH, AutoVersion::DATE);
 	bRes = new CBlobResult();
 	bResPerson = new CBlobResult();
 	meta = new xn::DepthMetaData();

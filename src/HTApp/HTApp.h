@@ -4,7 +4,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
-#include <XnCppWrapper.h>
 #include <unistd.h>
 #include "HTMutex.h"
 
@@ -38,8 +37,6 @@ public:
 private:
     sf::CircleShape circle;
     sf::RectangleShape rectShape;
-    xn::Context ctx;
-    std::vector<HTDeviceThreaded*> ktt;
     HTMutex drawMutti;
     std::vector<BlobDisplay> drawBlobs;
 

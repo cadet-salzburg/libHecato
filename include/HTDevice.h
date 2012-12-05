@@ -201,32 +201,35 @@ private:
  * </ul>
  * <br/><br/>
  * \section example Example
- * The following example shows how to use libHecato to output the detected gestures to the command line.<br/>It assumes a set-up xn::DepthGenerator and xn::Context
- * from the <a href="http://www.openni.org" target="_blank">OpenNI</a> framework. Future versions of libHecato are highly likely to do that for you.
+ * The following example shows how to use libHecato to output the detected gestures to the command line.<br/>The HTContext singleton takes care of correctly initializing
+ * the underlying OpenNI functions. It looks up the mapping (ID to the corresponding USBus) and adds all detected cameras to the production.<br/>
+ * During construction of the HTDeviceThreaded instances, it tries to load the settings associated with the given ID by looking
+ * for a file called "settings<id>.xml. Assumed id = 0, it then looks for "settings0.xml" in an attempt to restore the configuration previously set up.<br/>
  * @code
- * //assumed the following two are correctly set up:
- * xn::DepthGenerator* depthGen;
- * xn::Context ctx;
+ * HTContext::initialize();
  * @endcode
- * The next step is to initialize a @ref HTDevice, the base class for image generation and blob detection. As libHecato is intended to be used with multiple cameras
- * you have to pass-in the id of that instance, in this case '0'. During construction of the instance, it tries to load the settings associated with ID zero by looking
- * for a file called "settings<id>.xml, in this case then "settings0.xml" in an attempt to restore the configuration previously set up.<br/>
+ * HTContext has functionality to update the next frame and provides access to all the HTDeviceThreaded it has created during initialization. Use HTContext::getDevices() to
+ * access all generators and HTContext::updateAll() to acquire the next frames.
  * Next we initialize a @ref HTBlobInterpreterConsole, a simple implementation of @ref HTBlobInterpreter that outputs to the command line. We then inform our
- * @ref HTDevice to deliver the detected blobs to this interpreter:
+ * @ref HTDeviceThreaded to deliver the detected blobs to this interpreter:
  * @code
- * //use the DepthGenerator and a (here) arbitrary id to construct our HTDevice:
- * HTDevice dev(depthGen, 0);
  * //A simple implementation of HTBlobInterpreter that outputs to the console:
  * HTBlobInterpreterConsole interpreter();
- * //Tell the device where to put the blobs it has detected:
- * dev.setBlobResultTarget(&interpreter);
+ * //get a vector of all devices
+ * const std::vector<HTDeviceThreaded*> devices = HTContext::getDevices();
+ * if (devices.size() > 0)
+ * {
+ *     //if we have at least one device, use the interpreter with the first dev:
+ *     devices[0]->setBlobResultTarget(&interpreter);
+ * }
  *
  * //now loop until we found something else to play with:
  * while (thisMakesFun)
  * {
- *     ctx.WaitAndUpdateAll();
- *     dev.detectBlobsAndAnnotate();
+ *     HTContext::updateAll();
  * }
+ * //once done, make sure to tear down the context:
+ * HTContext::shutdown();
  * return 0;
  * @endcode
 

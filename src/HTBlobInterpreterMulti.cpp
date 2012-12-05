@@ -50,8 +50,6 @@ void HTBlobInterpreterMulti::setCorrelationPerson(float newDist)
 
 void HTBlobInterpreterMulti::handleBlobResult(std::vector<HTIBlobResultTarget::SBlobResult>& points, int id)
 {
-	//    if (points.size() != 0)
-	//        printf("GENID: %i\n", id);
 	mutti.lock();
 
 	if (id < 0 || id >= MAX_GENERATORS)

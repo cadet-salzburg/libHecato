@@ -1,6 +1,7 @@
 #include <tinyxml.h>
 #include "HTAppSettings.h"
 #include "HTApp.h"
+#include "HTContext.h"
 
 
 HTApp::HTApp() : sf::RenderWindow(sf::VideoMode(1920, 480), "HTApp"),
@@ -48,65 +49,16 @@ HTApp::HTApp() : sf::RenderWindow(sf::VideoMode(1920, 480), "HTApp"),
         printf("TUIO: OFF.\n");
     }
 
-    xn::NodeInfoList devices;
-    xn::NodeInfoList sensors;
+    HTContext::initialize();
 
-    std::map<int, int> mappings;
-    HTDevice::getBusMappings("../mapping.xml", mappings);
-
-    ctx.Init();
-    int numDevs = 0;
-    XnStatus status = ctx.EnumerateProductionTrees(XN_NODE_TYPE_DEVICE, NULL, devices);
-    if (status != XN_STATUS_OK || (devices.Begin() == devices.End()))
+    const std::vector<HTDeviceThreaded*>& devs = HTContext::getDevices();
+    for (unsigned int i = 0; i < devs.size(); i++)
     {
-        printf("HTApp: Enumeration of devices failed. No local cameras detected.\n");
-    }
-    int id = -1;
-    for (xn::NodeInfoList::Iterator iter = devices.Begin(); iter != devices.End(); ++iter)
-    {
-        unsigned char bus = 0;
-        unsigned short vendor_id;
-        unsigned short product_id;
-        unsigned char address;
-        sscanf ((*iter).GetCreationInfo(), "%hx/%hx@%hhu/%hhu", &vendor_id, &product_id, &bus, &address);
-        printf("VENDOR: %x, PRODUCTID: %x, connected %i @ %i\n", vendor_id, product_id, bus, address);
-
-        //use only xTion or kinect cameras:
-        if ((vendor_id != 0x1d27 || product_id != 0x600) /*xtion*/ && (vendor_id != 0x45e || product_id != 0x2ae) && (vendor_id != 0x45e || product_id != 0x2c2) /* Kinect (xbox)*/ )
-        {
-            printf("HTApp: No entry for this device!\n");
-            continue;
-        }
-
-
-        xn::NodeInfo deviceInfo = *iter;
-        xn::DepthGenerator* depthGen = new xn::DepthGenerator();
-        xn::Query q;
-        //create a production tree that's dependent on the current device
-        ctx.CreateProductionTree(deviceInfo);
-        q.AddNeededNode(deviceInfo.GetInstanceName());
-        ctx.CreateAnyProductionTree(XN_NODE_TYPE_DEPTH, &q, *depthGen);
-        //find the id matching the bus the device is connected to
-        std::map<int, int>::iterator mapIter = mappings.find(bus);
-        if (mapIter == mappings.end())
-        {
-            printf("WARNING: No entry for bus %i found!\n", bus);
-            id++;
-        }
-        else
-        {
-            id = mapIter->second;
-        }
-
-        printf("BUS IS: %i, put it as id: %i\n", bus, id);
-        HTDeviceThreaded* k = new HTDeviceThreaded(depthGen, id);
+        HTDeviceThreaded* k = devs[i];
         k->setBlobResultTarget(this);
         k->setEnablePersonTracking(HTAppSettings::usePersonTracking());
-        ktt.push_back(k);
         if (sender)
-            sender->registerGenerator(k, numDevs);
-        printf("HTApp: Adding Device %i to production.\n", numDevs);
-        numDevs++;
+            sender->registerGenerator(k, i);
     }
 
     setCorrelationRadiusW(HTAppSettings::getCorrelationW());
@@ -122,10 +74,7 @@ HTApp::HTApp() : sf::RenderWindow(sf::VideoMode(1920, 480), "HTApp"),
 
 HTApp::~HTApp()
 {
-    for (unsigned i = 0; i < ktt.size(); i++)
-    {
-        delete ktt[i];
-    }
+    HTContext::shutdown();
     if (sender)
         delete sender;
     if (recv)
@@ -136,12 +85,7 @@ HTApp::~HTApp()
 
 void HTApp::update()
 {
-    ctx.WaitAndUpdateAll();
-    const unsigned len = ktt.size();
-    for (unsigned i = 0; i < len; i++)
-    {
-        ktt[i]->compute();
-    }
+    HTContext::updateAll();
 }
 
 void HTApp::lockAndDrawAll()
