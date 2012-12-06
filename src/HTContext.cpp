@@ -90,7 +90,7 @@ void HTContext::getBusMappings(std::map<int, int>& m)
 	}
 }
 
-void HTContext::initialize()
+bool HTContext::initialize()
 {
     HTContext* inst = getInstance();
     getBusMappings(inst->mapping);
@@ -98,13 +98,19 @@ void HTContext::initialize()
 	xn::NodeInfoList devices;
 	xn::NodeInfoList sensors;
 
+	if (inst->initialized)
+    {
+        printf("HTCONTEXT: Already initialized! Call shutdown() first!\n");
+        return false;
+    }
+
 	inst->ctx->Init();
 	int numDevs = 0;
 	XnStatus status = inst->ctx->EnumerateProductionTrees(XN_NODE_TYPE_DEVICE, NULL, devices);
 	if (status != XN_STATUS_OK || (devices.Begin() == devices.End()))
 	{
-		printf("HTCONTEXT: Enumeration of devices failed. Quitting.\n");
-		exit(0);
+		printf("HTCONTEXT: Enumeration of devices failed.\n");
+		return false;
 	}
 	int id = -1;
 	for (xn::NodeInfoList::Iterator iter = devices.Begin(); iter != devices.End(); ++iter, ++numDevs)
@@ -148,4 +154,5 @@ void HTContext::initialize()
 		inst->devices.push_back(new HTDeviceThreaded(depthGen, id));
 	}
 	inst->initialized = true;
+	return true;
 }

@@ -49,8 +49,6 @@ HTApp::HTApp() : sf::RenderWindow(sf::VideoMode(1920, 480), "HTApp"),
         printf("TUIO: OFF.\n");
     }
 
-    HTContext::initialize();
-
     const std::vector<HTDeviceThreaded*>& devs = HTContext::getDevices();
     for (unsigned int i = 0; i < devs.size(); i++)
     {
@@ -74,7 +72,6 @@ HTApp::HTApp() : sf::RenderWindow(sf::VideoMode(1920, 480), "HTApp"),
 
 HTApp::~HTApp()
 {
-    HTContext::shutdown();
     if (sender)
         delete sender;
     if (recv)

@@ -17,7 +17,11 @@ public:
     //! Access the devices
     static const std::vector<class HTDeviceThreaded*>& getDevices();
     //! Initialize HTContext and set up the camera(s)
-    static void initialize();
+    /** This function takes care of the initialization of all connected
+      * devices and fills the vector obtainable via getDevices().
+      * It also tries to assign IDs as per mappings.xml file.
+      * \return True if at least one camera was initialized, false otherwise and if already initialized.*/
+    static bool initialize();
     //! Update all cameras (grab next frame) and invoke frame evaluation
     /** This function tells all cameras to update the frame and evaluate it.
       * In other words, after this call all image-related processing (blob detection,

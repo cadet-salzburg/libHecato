@@ -22,7 +22,12 @@ int main()
 	int key = 0;
 	int activeWindow = -1;
 	//first we need to initialize the context:
-	HTContext::initialize();
+	if (!HTContext::initialize())
+    {
+        printf("HTContext failed to initialize. Exiting...\n");
+        HTContext::shutdown();
+        return 0;
+    }
 
 	//get the devices:
 	const std::vector<HTDeviceThreaded*>& devs = HTContext::getDevices();
