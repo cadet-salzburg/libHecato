@@ -2,7 +2,7 @@
 #include <tinyxml.h>
 #include "HTContext.h"
 #include "HTDeviceThreaded.h"
-#include "../build/cb/version.h"
+#include "version.h"
 
 HTContext* HTContext::instance = 0;
 
