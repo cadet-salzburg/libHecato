@@ -137,7 +137,7 @@ void HTApp::unlock()
 	drawMutti.unlock();
 }
 
-void HTApp::handleEvents(const std::vector<HTBlobInterpreter::BlobRecord>& events)
+void HTApp::handleEvents(const std::vector<HTBlobInterpreter::TrackRecord>& events)
 {
 	drawMutti.lock();
     drawBlobs.clear();
@@ -145,7 +145,7 @@ void HTApp::handleEvents(const std::vector<HTBlobInterpreter::BlobRecord>& event
 
     for (unsigned i = 0; i < len; i++)
     {
-        const HTBlobInterpreter::BlobRecord* rec = &(events[i]);
+        const HTBlobInterpreter::TrackRecord* rec = &(events[i]);
         drawBlobs.push_back(BlobDisplay(rec->curX * winW, rec->curY * winH, rec->blobID, rec->brtype));
 
     }

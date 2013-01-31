@@ -44,7 +44,7 @@ public:
 	virtual ~HTBlobInterpreterMulti();
 	virtual void registerGenerator(HTIBlobGenerator* kt, int id);
 	virtual void handleBlobResult(std::vector<HTIBlobResultTarget::SBlobResult>& points, int id);
-	virtual void handleEvents(const std::vector<BlobRecord>& events) = 0;
+	virtual void handleEvents(const std::vector<TrackRecord>& events) = 0;
 	//!Set the horizontal correlation distance
 	/**Within this horizontal distance, two blobs on the borders of two neighboring
 	generators are assumed to be the same gesture.

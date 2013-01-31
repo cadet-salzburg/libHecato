@@ -9,7 +9,7 @@ HTBlobInterpreter::HTBlobInterpreter() : rClick(.07f), rDrag(.15f), blobID(0)
 	//init
 	for (unsigned i = 0; i < BLOB_LIST_SIZE; i++)
 	{
-		BlobRecord& b = records[i];
+		TrackRecord& b = records[i];
 		b.blobID = 0;
 		b.blobValid = false;
 		b.confidence = 0;
@@ -50,7 +50,7 @@ void HTBlobInterpreter::handleBlobResult(std::vector<HTIBlobResultTarget::SBlobR
 	const unsigned char confLevel = 5;
 	for (unsigned i = 0; i < BLOB_LIST_SIZE; i++)
 	{
-		BlobRecord* curRec = &(records[i]);
+		TrackRecord* curRec = &(records[i]);
 		curRec->blobHandled = false;
 		if (curRec->blobValid && curRec->type == HTET_DRAG_NEW)
 			curRec->type = HTET_DRAG_CONT;
@@ -64,7 +64,7 @@ void HTBlobInterpreter::handleBlobResult(std::vector<HTIBlobResultTarget::SBlobR
 		bool handled = false;
 		float minDist = 999.f;
 		unsigned minDistIndex = BLOB_LIST_SIZE;
-		BlobRecord* curRec = 0;
+		TrackRecord* curRec = 0;
 
 		for (unsigned j = 0; j < BLOB_LIST_SIZE && !handled; j++)   //here we try to find a record's expect pos closest to our observation
 		{
@@ -145,7 +145,7 @@ void HTBlobInterpreter::handleBlobResult(std::vector<HTIBlobResultTarget::SBlobR
 			unsigned newPos = 0;
 			for (;records[newPos].confidence != 0; ++newPos);
 			//new event
-			BlobRecord& b = records[newPos];
+			TrackRecord& b = records[newPos];
 			b.blobID = ++blobID;
 			b.blobValid = false;
 			b.confidence = 1;
@@ -165,10 +165,10 @@ void HTBlobInterpreter::handleBlobResult(std::vector<HTIBlobResultTarget::SBlobR
 
 	}
 
-	std::vector<BlobRecord> results;
+	std::vector<TrackRecord> results;
 	for (unsigned i = 0; i < BLOB_LIST_SIZE; i++)
 	{
-		BlobRecord* curRec = &(records[i]);
+		TrackRecord* curRec = &(records[i]);
 		if (curRec->confidence == 0)
 			continue;
 

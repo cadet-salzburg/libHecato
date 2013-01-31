@@ -30,7 +30,7 @@ public:
     void lockAndDrawAll();
     void unlock();
     void update();
-    void handleEvents(const std::vector<HTBlobInterpreter::BlobRecord>& events);
+    void handleEvents(const std::vector<HTBlobInterpreter::TrackRecord>& events);
     void handleBlobResult(std::vector<HTIBlobResultTarget::SBlobResult>& points, int id);
     void onResize();
 

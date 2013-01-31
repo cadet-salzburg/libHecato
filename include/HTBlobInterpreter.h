@@ -41,7 +41,7 @@ public:
 	detection area (similar to relative screen coordinates).
 	The values are relative to the boundary set in the HTDevice
 	class*/
-	struct BlobRecord
+	struct TrackRecord
 	{
 		//!A unique event ID. Useful for continuous drag events
 		unsigned int blobID;
@@ -57,7 +57,7 @@ public:
 		float curX;
 		//!The current position of the record
 		float curY;
-		//!The BlobRecord's event type
+		//!The TrackRecord's event type
 		HTEventType type;
 		//!This shows whether the blob record is valid. (False if blob has just been created but below confidence)
 		bool blobValid;
@@ -81,7 +81,7 @@ public:
 	/**Whenever an event is generated (click, drag), this function is called
 	in the deriving class.
 	\param events Event record that stores all the relevant information*/
-	virtual void handleEvents(const std::vector<BlobRecord>& events) = 0;
+	virtual void handleEvents(const std::vector<TrackRecord>& events) = 0;
 	virtual void handleBlobResult(std::vector<HTIBlobResultTarget::SBlobResult>& points, int id);
 	virtual void registerGenerator(class HTIBlobGenerator* kt, int id);
 	//!DEPRECATED
@@ -119,8 +119,8 @@ public:
 protected:
 	//!DEPRECATED
 	void getRelCoords(int x, int y, float& relX, float& relY);
-	//!Storage for currently active BlobRecords
-	BlobRecord records[BLOB_LIST_SIZE];
+	//!Storage for currently active TrackRecords
+	TrackRecord records[BLOB_LIST_SIZE];
 
 private:
 	int oX, oY, oW, oH;
@@ -137,12 +137,12 @@ private:
 //! Debug implementation of HTIBlobResultTarget that outputs to the console
 class HTBlobInterpreterConsole : public HTBlobInterpreter
 {
-	void handleEvents(const std::vector<BlobRecord>& events)
+	void handleEvents(const std::vector<TrackRecord>& events)
 	{
 		const unsigned len = events.size();
 		for(unsigned i = 0; i < len; i++)
 		{
-			const BlobRecord& event = events[i];
+			const TrackRecord& event = events[i];
 			switch(event.type)
 			{
 			case HTET_CLICK:

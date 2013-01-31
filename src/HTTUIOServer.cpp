@@ -33,7 +33,7 @@ void HTTUIOServer::setMargins(float left, float right)
 	printf("TUIOSERVER: Margins: %2.2f, %2.2f\n", lMargin, rMargin);
 }
 
-void HTTUIOServer::handleEvents(const std::vector<BlobRecord>& events)
+void HTTUIOServer::handleEvents(const std::vector<TrackRecord>& events)
 {
 	const unsigned len = events.size();
 	if (len == 0)
@@ -53,7 +53,7 @@ void HTTUIOServer::handleEvents(const std::vector<BlobRecord>& events)
 
 	for (unsigned i = 0; i < len; i++)
 	{
-		const BlobRecord* rec = &(events[i]);
+		const TrackRecord* rec = &(events[i]);
 		//for now, skip person events
 		//float cX = (float)((int)((lMargin + (rec->curX * (rMargin - lMargin))) * 1000.f)) / 1000.f;
 		//float cY = (float)((int)(rec->curY * 1000.f) / 1000.f);

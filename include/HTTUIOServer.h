@@ -21,7 +21,7 @@ public:
 	//!Destructor
 	virtual ~HTTUIOServer();
 	//!Implementation of the pure virtual function. Sends TUIO Cursors.
-	virtual void handleEvents(const std::vector<BlobRecord>& events);
+	virtual void handleEvents(const std::vector<TrackRecord>& events);
 	//!Sets up the connection. Do this before handling events (Cpt. Obvious).
 	void setupConnection(const char* host, int port);
 	//!Set a margin for the tracking region
