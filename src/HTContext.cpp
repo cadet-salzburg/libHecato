@@ -122,13 +122,14 @@ bool HTContext::initialize()
 		sscanf ((*iter).GetCreationInfo(), "%hx/%hx@%hhu/%hhu", &vendor_id, &product_id, &bus, &address);
 		printf("VENDOR: %x, PRODUCTID: %x, connected %i @ %i\n", vendor_id, product_id, bus, address);
 
+		/*
 		//use only xTion cameras:
 		if ((vendor_id != 0x1d27 || product_id != 0x600) && (vendor_id != 0x45e || product_id != 0x2ae))
 		{
 			printf("HTCONTEXT: No entry for this device!\n");
 			continue;
 		}
-
+		*/
 
 		xn::NodeInfo deviceInfo = *iter;
 		xn::DepthGenerator* depthGen = new xn::DepthGenerator();
@@ -143,7 +144,7 @@ bool HTContext::initialize()
 		{
 			printf("WARNING: No entry for bus %i found!\n", bus);
 			id++;
-			id += 100;
+			//id += 100;
 		}
 		else
 		{
