@@ -84,7 +84,7 @@ void HTBarrier::continueThreads()
 	std::set<DWORD>::iterator it = m_ThreadIDs.begin();
 	while (it != m_ThreadIDs.end())
 	{
-		HANDLE hThread = OpenThread(0, FALSE, *it);
+		HANDLE hThread = OpenThread(THREAD_SUSPEND_RESUME, FALSE, *it);
 		ResumeThread(hThread);
 		it = m_ThreadIDs.erase(it);
 	}
