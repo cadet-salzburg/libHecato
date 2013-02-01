@@ -17,6 +17,7 @@
     <ClCompile Include="..\..\src\HTBarrier.cpp" />
     <ClCompile Include="..\..\src\HTBlobInterpreter.cpp" />
     <ClCompile Include="..\..\src\HTBlobInterpreterMulti.cpp" />
+    <ClCompile Include="..\..\src\HTContext.cpp" />
     <ClCompile Include="..\..\src\HTDevice.cpp" />
     <ClCompile Include="..\..\src\HTDeviceThreaded.cpp" />
     <ClCompile Include="..\..\src\HTKalmanFilter.cpp" />
@@ -32,6 +33,7 @@
     <ClInclude Include="..\..\include\HTBarrier.h" />
     <ClInclude Include="..\..\include\HTBlobInterpreter.h" />
     <ClInclude Include="..\..\include\HTBlobInterpreterMulti.h" />
+    <ClInclude Include="..\..\include\HTContext.h" />
     <ClInclude Include="..\..\include\HTDevice.h" />
     <ClInclude Include="..\..\include\HTDeviceThreaded.h" />
     <ClInclude Include="..\..\include\HTIBlobResultTarget.h" />

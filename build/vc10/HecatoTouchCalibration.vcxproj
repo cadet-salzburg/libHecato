@@ -42,9 +42,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\..\bin\win32</OutDir>
+    <TargetName>$(ProjectName)d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\bin\win32</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -52,7 +55,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\src\win32;..\..\..\..\external\OpenNI\include\;..\..\..\..\external\OpenCV\include\;..\..\..\..\external\OpenCV\include\opencv2;..\..\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\src\win32;$(_2REAL_DEPENDENCIES_DIR)\OpenNI\include\;$(_2REAL_DEPENDENCIES_DIR)\OpenCV\include\;$(_2REAL_DEPENDENCIES_DIR)\OpenCV\include\opencv2;..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -68,7 +71,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\src\win32;..\..\..\..\external\OpenNI\include\;..\..\..\..\external\OpenCV\include;..\..\..\..\external\OpenCV\include\opencv2;..\..\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\src\win32;$(_2REAL_DEPENDENCIES_DIR)\OpenNI\include\;$(_2REAL_DEPENDENCIES_DIR)\OpenCV\include;$(_2REAL_DEPENDENCIES_DIR)\OpenCV\include\opencv2;..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

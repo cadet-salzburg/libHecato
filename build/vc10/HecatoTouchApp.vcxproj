@@ -49,9 +49,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>$(ProjectName)d</TargetName>
+    <OutDir>..\..\bin\win32</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\bin\win32</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -69,10 +71,10 @@
       <IgnoreSpecificDefaultLibraries>LIBCMT;LIBCMTD</IgnoreSpecificDefaultLibraries>
       <IgnoreAllDefaultLibraries>
       </IgnoreAllDefaultLibraries>
-      <OutputFile>..\..\bin\win32\$(TargetName)$(TargetExt)</OutputFile>
+      <OutputFile>$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <PostBuildEvent>
-      <Command>copy ..\..\..\..\external\OpenCV\bin\*.dll ..\..\bin\win32\</Command>
+      <Command>copy $(_2REAL_DEPENDENCIES_DIR)\opencv\lib\vc10\bin\*.dll ..\..\bin\win32\</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>
@@ -97,10 +99,10 @@
       <AdditionalDependencies>ws2_32.lib;libHecatoTouch.lib;sfml-graphics-s.lib;sfml-main.lib;sfml-system-s.lib;sfml-window-s.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(_2REAL_DEPENDENCIES_DIR)\SFML\lib;$(_2REAL_DEPENDENCIES_DIR)\OpenNI\lib;..\..\lib\win32</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
-      <OutputFile>..\..\bin\win32\$(TargetName)$(TargetExt)</OutputFile>
+      <OutputFile>$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <PostBuildEvent>
-      <Command>copy ..\..\..\..\external\OpenCV\bin\*.dll ..\..\bin\win32\</Command>
+      <Command>copy $(_2REAL_DEPENDENCIES_DIR)\opencv\lib\vc10\bin\*.dll ..\..\bin\win32\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
