@@ -8,6 +8,7 @@
 #include <core/core.hpp>
 
 #include "HTIBlobResultTarget.h"
+#include "HTKalmanFilter.h"
 
 #define BLOB_LIST_SIZE 32
 //#ifdef _WIN32
@@ -19,7 +20,9 @@
 //!Base class that does basic mouse-style event interpretation
 /**HTBlobInterpreter generates drag- and click events respectively.
 Derive and implement the pure virtual function \see handleEvent to be notified
-whenever an event is generated.*/
+whenever an event is generated.
+\note Over time HTBlobInterpreterMulti has gathered a more complete functionality
+and also works for single-cam setups. Please use the multi version instead of this one.*/
 class HTBlobInterpreter : public HTIBlobResultTarget
 {
 public:
@@ -70,6 +73,7 @@ public:
 		//!Used by HTBlobInterpreter internally.
 		float expectY;
 		HTIBlobResultTarget::BlobResultType brtype;
+		HTKalmanFilter* filter;
 	};
 
 public:

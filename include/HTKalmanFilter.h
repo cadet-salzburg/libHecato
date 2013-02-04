@@ -7,6 +7,7 @@ public:
 	~HTKalmanFilter();
 
 	void updateMeasurement(float posX, float posY, float* returnX = 0, float* returnY = 0);
+	void reinitializeFilter(float initX, float initY);
 	float getX();
 	float getY();
 

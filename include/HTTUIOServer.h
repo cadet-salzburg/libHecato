@@ -39,8 +39,8 @@ public:
 private:
 	struct TuioOutput
 	{
+	    //to be extended
 		class TUIO::TuioCursor* cursor;
-		class HTKalmanFilter* filter;
 	};
 
 	class TUIO::TuioServer* tuioServer;

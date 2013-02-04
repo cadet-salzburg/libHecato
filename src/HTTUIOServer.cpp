@@ -1,6 +1,5 @@
 #include "TUIO/TuioServer.h"
 #include "HTTUIOServer.h"
-#include "HTKalmanFilter.h"
 
 using namespace TUIO;
 
@@ -62,8 +61,8 @@ void HTTUIOServer::handleEvents(const std::vector<TrackRecord>& events)
 
 		if (rec->brtype == HTIBlobResultTarget::BRT_HAND)
 			cY = rec->curY;
-		else
-			printf("PERSON!\n");
+//		else
+//			printf("PERSON!\n");
 
 		switch (rec->type)
 		{
@@ -72,7 +71,7 @@ void HTTUIOServer::handleEvents(const std::vector<TrackRecord>& events)
 			printf("Adding   Cursor... BlobID: %i SID: %li (X: %f, Y: %f)\n", rec->blobID, cursor->getSessionID(), cursor->getPosition().getX(), cursor->getPosition().getY());
 			TuioOutput to;
 			to.cursor = cursor;
-			to.filter = new HTKalmanFilter(cX, cY);
+			//to.filter = new HTKalmanFilter(cX, cY);
 			cursorMap.insert(std::pair<unsigned int, TuioOutput>(rec->blobID, to));
 			break;
 
@@ -83,7 +82,7 @@ void HTTUIOServer::handleEvents(const std::vector<TrackRecord>& events)
 				printf("(HTTUIOServer::handleEvents) WARNING: DRAG_CONT: Cursor (ID: %i) not found which should be in the list. Continuing...\n", rec->blobID);
 				break;
 			}
-			curIter->second.filter->updateMeasurement(cX, cY, &cX, &cY);
+			//curIter->second.filter->updateMeasurement(cX, cY, &cX, &cY);
 			//            if (cX > .98f || cX < 0.02f || cY > .98f || cY < .02f)
 			//            {
 
@@ -100,7 +99,7 @@ void HTTUIOServer::handleEvents(const std::vector<TrackRecord>& events)
 
 			printf("CUR %f, %f\n", cX, cY);
 
-			tuioServer->updateTuioCursor(curIter->second.cursor, cX, cY);
+			//tuioServer->updateTuioCursor(curIter->second.cursor, cX, cY);
 			break;
 
 		case HTBlobInterpreter::HTET_DRAG_OFF:
@@ -110,7 +109,7 @@ void HTTUIOServer::handleEvents(const std::vector<TrackRecord>& events)
 				printf("(HTTUIOServer::handleEvents) WARNING: DRAG_OFF: Cursor (ID: %i) not found which should be in the list. Continuing...\n", rec->blobID);
 				break;
 			}
-			delete curIter->second.filter;
+			//delete curIter->second.filter;
 			printf("Removing Cursor... BlobID: %i SID: %li (mapsize: %lu)\n", rec->blobID, curIter->second.cursor->getSessionID(), cursorMap.size() - 1);
 			tuioServer->removeTuioCursor(curIter->second.cursor);
 			cursorMap.erase(curIter);

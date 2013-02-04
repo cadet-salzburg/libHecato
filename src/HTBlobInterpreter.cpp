@@ -21,11 +21,16 @@ HTBlobInterpreter::HTBlobInterpreter() : rClick(.07f), rDrag(.15f), blobID(0)
 		b.expectX = 0.f;
 		b.expectY = 0.f;
 		b.type = HTET_CLICK;
+		b.filter = new HTKalmanFilter(0.f, 0.f);
 	}
 }
 
 HTBlobInterpreter::~HTBlobInterpreter()
 {
+    for (unsigned i = 0; i < BLOB_LIST_SIZE; i++)
+	{
+	    delete records[i].filter;
+	}
 }
 
 void HTBlobInterpreter::setBoundary(int origX, int origY, int width, int height)
@@ -122,8 +127,8 @@ void HTBlobInterpreter::handleBlobResult(std::vector<HTIBlobResultTarget::SBlobR
 			{
 				curRec->originX = curRec->curX;
 				curRec->originY = curRec->curY;
-				curRec->curX = curPoint->point.x;
-				curRec->curY = curPoint->point.y;
+				//now update the current position accordingly with kalman-filtered data
+				curRec->filter->updateMeasurement(curPoint->point.x, curPoint->point.y, &curRec->curX, &curRec->curY);
 				curRec->expectX = curRec->curX + (curPoint->point.x - curRec->originX);
 				curRec->expectY = curRec->curY + (curPoint->point.y - curRec->originY);
 				if (curRec->confidence < confLevel)
@@ -154,6 +159,7 @@ void HTBlobInterpreter::handleBlobResult(std::vector<HTIBlobResultTarget::SBlobR
 			b.originY = curPoint->point.y;
 			b.expectX = curPoint->point.x;
 			b.expectY = curPoint->point.y;
+			b.filter->reinitializeFilter(curPoint->point.x, curPoint->point.y);
 			b.curX = curPoint->point.x;
 			b.curY = curPoint->point.y;
 			if (rClick == 0.f)

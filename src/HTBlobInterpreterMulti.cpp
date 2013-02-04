@@ -117,7 +117,7 @@ void HTBlobInterpreterMulti::correlateBlobs(std::vector<HTIBlobResultTarget::SBl
 				if (compareTo->type != compare->type || compareTo == compare || compareTo->handled || compare->originId == compareTo->originId)
 					continue;
 
-				//if (getDist(compare->x, compare->y, compareTo->x, compareTo->y) < corrRadiusW && )
+				//this here is executed when two neighboring blobs are to be correlated
 				float dX = compare->x - compareTo->x;
 				if (dX < 0.f)
 					dX = -dX;
@@ -147,7 +147,7 @@ void HTBlobInterpreterMulti::correlateBlobs(std::vector<HTIBlobResultTarget::SBl
 				if (compareTo->type != compare->type || compareTo == compare || compareTo->handled || compare->originId == compareTo->originId)
 					continue;
 
-				//if (getDist(compare->x, compare->y, compareTo->x, compareTo->y) < corrRadiusW && )
+				//this here is executed when two neighboring blobs are to be correlated
 				float dX = compare->x - compareTo->x;
 				if (dX < 0.f)
 					dX = -dX;
