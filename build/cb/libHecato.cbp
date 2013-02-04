@@ -81,6 +81,7 @@
 		<Unit filename="../../include/HTDevice.h" />
 		<Unit filename="../../include/HTDeviceThreaded.h" />
 		<Unit filename="../../include/HTIBlobResultTarget.h" />
+		<Unit filename="../../include/HTITrackRecordTarget.h" />
 		<Unit filename="../../include/HTKalmanFilter.h" />
 		<Unit filename="../../include/HTMutex.h" />
 		<Unit filename="../../include/HTNetworkReceiver.h" />
