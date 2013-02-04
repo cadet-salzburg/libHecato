@@ -60,6 +60,10 @@ public:
 		float curX;
 		//!The current position of the record
 		float curY;
+		//!The current position of the record kalman filtered
+		float curXsmooth;
+		//!The current position of the record kalman filtered
+		float curYsmooth;
 		//!The TrackRecord's event type
 		HTEventType type;
 		//!This shows whether the blob record is valid. (False if blob has just been created but below confidence)

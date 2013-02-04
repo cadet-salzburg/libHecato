@@ -1,18 +1,12 @@
 #include "HTApp.h"
 #include "HTAppSettings.h"
-#include "HTContext.h"
 
 int main()
 {
 
 
     HTApp app;
-    if (!HTContext::initialize())
-    {
-        printf("HTContext failed to initialize. Exiting...\n");
-        HTContext::shutdown();
-        return 0;
-    }
+
     /*Some setups (usually with KVM switches) seem to screw up the vsync with the monitor
       causing strange app lockups. For this case, syncing to v is configurable in the appsettings.xml*/
     bool useVSync = HTAppSettings::useFPS();
@@ -47,7 +41,6 @@ int main()
             usleep(fDelay);
 #endif
     }
-    HTContext::shutdown();
     return EXIT_SUCCESS;
 }
 

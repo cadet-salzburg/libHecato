@@ -5,7 +5,7 @@
 		<Project filename="HTCalibration.cbp">
 			<Depends filename="libHecato.cbp" />
 		</Project>
-		<Project filename="HTApp.cbp">
+		<Project filename="HTApp.cbp" active="1">
 			<Depends filename="libHecato.cbp" />
 		</Project>
 	</Workspace>

@@ -8,5 +8,5 @@
     <fps on="0" delay="20"/>
     <correlation width="0.08f" height="0.25f"/>
     <radius click="0.f" drag="0.05f"/>
-    <persontracking on="0" corr="0.25f"/>
+    <persontracking on="1" corr="0.25f"/>
 </appsettings>

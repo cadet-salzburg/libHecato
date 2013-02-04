@@ -128,7 +128,11 @@ void HTBlobInterpreter::handleBlobResult(std::vector<HTIBlobResultTarget::SBlobR
 				curRec->originX = curRec->curX;
 				curRec->originY = curRec->curY;
 				//now update the current position accordingly with kalman-filtered data
-				curRec->filter->updateMeasurement(curPoint->point.x, curPoint->point.y, &curRec->curX, &curRec->curY);
+				//NOTE: as hand gestures can be quite jerky, apply smoothing AFTER detection (and store it separately) to not lose track
+				curRec->filter->updateMeasurement(curPoint->point.x, curPoint->point.y, &curRec->curXsmooth, &curRec->curYsmooth);
+				curRec->curX = curPoint->point.x;
+				curRec->curY = curPoint->point.y;
+
 				curRec->expectX = curRec->curX + (curPoint->point.x - curRec->originX);
 				curRec->expectY = curRec->curY + (curPoint->point.y - curRec->originY);
 				if (curRec->confidence < confLevel)

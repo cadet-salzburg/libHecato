@@ -56,11 +56,11 @@ void HTTUIOServer::handleEvents(const std::vector<TrackRecord>& events)
 		//for now, skip person events
 		//float cX = (float)((int)((lMargin + (rec->curX * (rMargin - lMargin))) * 1000.f)) / 1000.f;
 		//float cY = (float)((int)(rec->curY * 1000.f) / 1000.f);
-		float cX = (lMargin + (rec->curX * (rMargin - lMargin)));
+		float cX = (lMargin + (rec->curXsmooth * (rMargin - lMargin)));
 		float cY = 0.f;
 
 		if (rec->brtype == HTIBlobResultTarget::BRT_HAND)
-			cY = rec->curY;
+			cY = rec->curYsmooth;
 //		else
 //			printf("PERSON!\n");
 

@@ -48,8 +48,10 @@ HTApp::HTApp() : sf::RenderWindow(sf::VideoMode(1920, 480), "HTApp"),
     {
         printf("TUIO: OFF.\n");
     }
-
+    printf("Initializing HTContext...");
+    HTContext::initialize();
     const std::vector<HTDeviceThreaded*>& devs = HTContext::getDevices();
+    printf("found %lu devices.\n", devs.size());
     for (unsigned int i = 0; i < devs.size(); i++)
     {
         HTDeviceThreaded* k = devs[i];
@@ -78,6 +80,7 @@ HTApp::~HTApp()
         delete recv;
     if (tuioServer)
         delete tuioServer;
+    HTContext::shutdown();
 }
 
 void HTApp::update()
@@ -146,7 +149,7 @@ void HTApp::handleEvents(const std::vector<HTBlobInterpreter::TrackRecord>& even
     for (unsigned i = 0; i < len; i++)
     {
         const HTBlobInterpreter::TrackRecord* rec = &(events[i]);
-        drawBlobs.push_back(BlobDisplay(rec->curX * winW, rec->curY * winH, rec->blobID, rec->brtype));
+        drawBlobs.push_back(BlobDisplay(rec->curXsmooth * winW, rec->curYsmooth * winH, rec->blobID, rec->brtype));
 
     }
 	drawMutti.unlock();
