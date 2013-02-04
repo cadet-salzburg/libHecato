@@ -3,7 +3,7 @@
 
 using namespace TUIO;
 
-HTTUIOServer::HTTUIOServer() : HTBlobInterpreter(), tuioServer(0), lMargin(0.f), rMargin(1.f)
+HTTUIOServer::HTTUIOServer() : tuioServer(0), lMargin(0.f), rMargin(1.f)
 {
 
 }
@@ -32,7 +32,7 @@ void HTTUIOServer::setMargins(float left, float right)
 	printf("TUIOSERVER: Margins: %2.2f, %2.2f\n", lMargin, rMargin);
 }
 
-void HTTUIOServer::handleEvents(const std::vector<TrackRecord>& events)
+void HTTUIOServer::handleEvents(const std::vector<HTBlobInterpreter::TrackRecord>& events)
 {
 	const unsigned len = events.size();
 	if (len == 0)
@@ -52,7 +52,7 @@ void HTTUIOServer::handleEvents(const std::vector<TrackRecord>& events)
 
 	for (unsigned i = 0; i < len; i++)
 	{
-		const TrackRecord* rec = &(events[i]);
+		const HTBlobInterpreter::TrackRecord* rec = &(events[i]);
 		//for now, skip person events
 		//float cX = (float)((int)((lMargin + (rec->curX * (rMargin - lMargin))) * 1000.f)) / 1000.f;
 		//float cY = (float)((int)(rec->curY * 1000.f) / 1000.f);

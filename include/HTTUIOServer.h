@@ -1,4 +1,4 @@
-#include "HTBlobInterpreter.h"
+#include "HTITrackRecordTarget.h"
 
 namespace TUIO
 {
@@ -10,10 +10,10 @@ namespace TUIO
 /**This class represents the connector towards the TUIO protocol,
 broadly used in the context of gestural, object-based user interaction.
 The functionality is pretty self-explanatory, just a standard
-HTBlobInterpreter keeping track of received events.
+HTITrackRecordTarget keeping track of received events.
 \see http://www.tuio.org/
 */
-class HTTUIOServer : public HTBlobInterpreter
+class HTTUIOServer : public HTITrackRecordTarget
 {
 public:
 	//!Constructor
@@ -21,7 +21,7 @@ public:
 	//!Destructor
 	virtual ~HTTUIOServer();
 	//!Implementation of the pure virtual function. Sends TUIO Cursors.
-	virtual void handleEvents(const std::vector<TrackRecord>& events);
+	virtual void handleEvents(const std::vector<HTBlobInterpreter::TrackRecord>& events);
 	//!Sets up the connection. Do this before handling events (Cpt. Obvious).
 	void setupConnection(const char* host, int port);
 	//!Set a margin for the tracking region

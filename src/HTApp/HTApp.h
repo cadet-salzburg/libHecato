@@ -13,7 +13,7 @@
 #include "HTTUIOServer.h"
 #include "HTBlobInterpreterMulti.h"
 
-class HTApp : public sf::RenderWindow, public HTBlobInterpreterMulti
+class HTApp : public sf::RenderWindow, public HTBlobInterpreterMulti, public HTITrackRecordTarget
 {
 public:
     struct BlobDisplay

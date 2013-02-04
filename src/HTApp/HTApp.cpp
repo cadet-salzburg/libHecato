@@ -70,6 +70,8 @@ HTApp::HTApp() : sf::RenderWindow(sf::VideoMode(1920, 480), "HTApp"),
     printf("HTApp: Setting drag  radius to: %f\n", HTAppSettings::getRadiusDrag());
     setClickRadius(HTAppSettings::getRadiusClick());
     setDragRadius(HTAppSettings::getRadiusDrag());
+
+    setTrackRecordTarget(this);
 }
 
 HTApp::~HTApp()

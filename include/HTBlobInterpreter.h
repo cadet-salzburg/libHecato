@@ -85,11 +85,6 @@ public:
 	HTBlobInterpreter();
 	//!The default destructor
 	virtual ~HTBlobInterpreter();
-	//!This function is called by the base class
-	/**Whenever an event is generated (click, drag), this function is called
-	in the deriving class.
-	\param events Event record that stores all the relevant information*/
-	virtual void handleEvents(const std::vector<TrackRecord>& events) = 0;
 	virtual void handleBlobResult(std::vector<HTIBlobResultTarget::SBlobResult>& points, int id);
 	virtual void registerGenerator(class HTIBlobGenerator* kt, int id);
 	//!DEPRECATED
@@ -123,12 +118,15 @@ public:
 	{
 		return sqrt(pow((x1 - x2), 2) + pow((y1 - y2), 2));
 	}
+    //!Set the receiver the interpreter should send the tracks to
+	void setTrackRecordTarget(class HTITrackRecordTarget* t);
 
 protected:
 	//!DEPRECATED
 	void getRelCoords(int x, int y, float& relX, float& relY);
 	//!Storage for currently active TrackRecords
 	TrackRecord records[BLOB_LIST_SIZE];
+	class HTITrackRecordTarget* trackTarget;
 
 private:
 	int oX, oY, oW, oH;

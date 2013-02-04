@@ -2,9 +2,9 @@
 #ifndef WIN32
 #include <sys/time.h>
 #endif
-#include "HTBlobInterpreter.h"
+#include "HTITrackRecordTarget.h"
 
-HTBlobInterpreter::HTBlobInterpreter() : rClick(.07f), rDrag(.15f), blobID(0)
+HTBlobInterpreter::HTBlobInterpreter() : rClick(.07f), rDrag(.15f), blobID(0), trackTarget(0)
 {
 	//init
 	for (unsigned i = 0; i < BLOB_LIST_SIZE; i++)
@@ -49,6 +49,11 @@ void HTBlobInterpreter::getRelCoords(int x, int y, float& relX, float& relY)
 
 void HTBlobInterpreter::registerGenerator(HTIBlobGenerator* kt, int id)
 {}
+
+void HTBlobInterpreter::setTrackRecordTarget(HTITrackRecordTarget* t)
+{
+    trackTarget = t;
+}
 
 void HTBlobInterpreter::handleBlobResult(std::vector<HTIBlobResultTarget::SBlobResult>& points, int id)
 {
@@ -200,7 +205,8 @@ void HTBlobInterpreter::handleBlobResult(std::vector<HTIBlobResultTarget::SBlobR
 
 		results.push_back(*curRec);
 	}
-	handleEvents(results);
+	if (trackTarget)
+        trackTarget->handleEvents(results);
 }
 
 bool HTBlobInterpreter::setClickRadius(float newRadius)
