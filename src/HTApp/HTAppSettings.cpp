@@ -4,23 +4,20 @@
 
 HTAppSettings* HTAppSettings::instance = NULL;
 
-HTAppSettings::HTAppSettings() : tHost(""),
-                             sHost(""),
-                             tPort(0),
-                             sPort(0),
-                             rPort(0),
-                             delay(30),
-                             useT(false),
-                             useS(false),
-                             useR(false),
-                             useF(false),
-                             lMargin(0.f),
-                             rMargin(0.f),
-                             corrW(0.1f),
-                             corrH(0.1f),
-                             corrPerson(0.15f),
-                             rClick(0.f),
-                             rDrag(0.1f)
+HTAppSettings::HTAppSettings() : sHost(""),
+                                 sPort(0),
+                                 rPort(0),
+                                 delay(30),
+                                 useS(false),
+                                 useR(false),
+                                 useF(false),
+                                 lMargin(0.f),
+                                 rMargin(0.f),
+                                 corrW(0.1f),
+                                 corrH(0.1f),
+                                 corrPerson(0.15f),
+                                 rClick(0.f),
+                                 rDrag(0.1f)
 {
     int intHelper = 0;
 
@@ -31,99 +28,64 @@ HTAppSettings::HTAppSettings() : tHost(""),
         return;
     }
     TiXmlHandle handle(&doc);
-    TiXmlElement* curElem = handle.FirstChildElement().FirstChildElement("tuioserver").ToElement();
+    TiXmlElement* curElem = handle.FirstChildElement().FirstChildElement().ToElement();
 
-    if (!curElem)
+    while (curElem)
     {
-        printf("HTAppSettings: Unable to find TUIO-related elems!\n");
-    }
-    else
-    {
-        curElem->QueryStringAttribute("host", &tHost);
-        curElem->QueryIntAttribute("port", &tPort);
-        curElem->QueryIntAttribute("on", &intHelper);
-        useT = intHelper == 1 ? true : false;
-    }
+        if (curElem->ValueStr().compare("tuioserver") == 0)
+        {
+            curElem->QueryIntAttribute("on", &intHelper);
+            if (intHelper == 1)
+            {
+                TUIOServerData data;
+                curElem->QueryStringAttribute("host", &data.host);
+                curElem->QueryIntAttribute("port", &data.port);
+                tuioServers.push_back(data);
+            }
+        }
+        else if (curElem->ValueStr().compare("sender") == 0)
+        {
+            curElem->QueryStringAttribute("host", &sHost);
+            curElem->QueryIntAttribute("port", &sPort);
+            curElem->QueryIntAttribute("on", &intHelper);
+            useS = intHelper == 1 ? true : false;
+        }
+        else if (curElem->ValueStr().compare("receiver") == 0)
+        {
+            curElem->QueryIntAttribute("on", &intHelper);
+            useR = intHelper == 1 ? true : false;
+            curElem->QueryIntAttribute("port", &rPort);
+        }
+        else if (curElem->ValueStr().compare("trackingmargin") == 0)
+        {
+            curElem->QueryFloatAttribute("left", &lMargin);
+            curElem->QueryFloatAttribute("right", &rMargin);
+        }
+        else if (curElem->ValueStr().compare("fps") == 0)
+        {
+            curElem->QueryIntAttribute("on", &intHelper);
+            useF = intHelper == 1 ? true : false;
+            curElem->QueryIntAttribute("delay", &delay);
+        }
+        else if (curElem->ValueStr().compare("correlation") == 0)
+        {
+            curElem->QueryFloatAttribute("width", &corrW);
+            curElem->QueryFloatAttribute("height", &corrH);
+        }
+        else if (curElem->ValueStr().compare("persontracking") == 0)
+        {
+            curElem->QueryIntAttribute("on", &intHelper);
+            useP = intHelper == 1 ? true : false;
+            curElem->QueryFloatAttribute("corr", &corrPerson);
+        }
+        else if (curElem->ValueStr().compare("radius") == 0)
+        {
+            curElem->QueryFloatAttribute("click", &rClick);
+            curElem->QueryFloatAttribute("drag", &rDrag);
+        }
 
+        curElem = curElem->NextSiblingElement();
 
-    curElem = handle.FirstChildElement().FirstChildElement("sender").ToElement();
-    if (!curElem)
-    {
-        printf("HTAppSettings: Unable to find sender-related elems!\n");
-    }
-    else
-    {
-        curElem->QueryStringAttribute("host", &sHost);
-        curElem->QueryIntAttribute("port", &sPort);
-        curElem->QueryIntAttribute("on", &intHelper);
-        useS = intHelper == 1 ? true : false;
-    }
-
-    curElem = handle.FirstChildElement().FirstChildElement("receiver").ToElement();
-    if (!curElem)
-    {
-        printf("HTAppSettings: Unable to find receiver-related elems!\n");
-    }
-    else
-    {
-        curElem->QueryIntAttribute("on", &intHelper);
-        useR = intHelper == 1 ? true : false;
-        curElem->QueryIntAttribute("port", &rPort);
-    }
-
-
-    curElem = handle.FirstChildElement().FirstChildElement("trackingmargin").ToElement();
-    if (!curElem)
-    {
-        printf("HTAppSettings: Unable to find tracking margin elems!\n");
-    }
-    else
-    {
-        curElem->QueryFloatAttribute("left", &lMargin);
-        curElem->QueryFloatAttribute("right", &rMargin);
-    }
-
-    curElem = handle.FirstChildElement().FirstChildElement("fps").ToElement();
-    if (!curElem)
-    {
-        printf("HTAppSettings: Unable to find FPS elems!\n");
-    }
-    else
-    {
-        curElem->QueryIntAttribute("on", &intHelper);
-        useF = intHelper == 1 ? true : false;
-        curElem->QueryIntAttribute("delay", &delay);
-    }
-    curElem = handle.FirstChildElement().FirstChildElement("correlation").ToElement();
-    if (!curElem)
-    {
-        printf("HTAppSettings: Unable to find correlation elems!\n");
-    }
-    else
-    {
-        curElem->QueryFloatAttribute("width", &corrW);
-        curElem->QueryFloatAttribute("height", &corrH);
-    }
-    curElem = handle.FirstChildElement().FirstChildElement("persontracking").ToElement();
-    if (!curElem)
-    {
-        printf("HTAppSettings: Unable to find persontracking elems!\n");
-    }
-    else
-    {
-        curElem->QueryIntAttribute("on", &intHelper);
-        useP = intHelper == 1 ? true : false;
-        curElem->QueryFloatAttribute("corr", &corrPerson);
-    }
-    curElem = handle.FirstChildElement().FirstChildElement("radius").ToElement();
-    if (!curElem)
-    {
-        printf("HTAppSettings: Unable to find radius elems!\n");
-    }
-    else
-    {
-        curElem->QueryFloatAttribute("click", &rClick);
-        curElem->QueryFloatAttribute("drag", &rDrag);
     }
 }
 
@@ -151,16 +113,6 @@ float HTAppSettings::getRightMargin()
     return getInstance()->rMargin;
 }
 
-const char* HTAppSettings::getTUIOHost()
-{
-    return getInstance()->tHost.c_str();
-}
-
-int HTAppSettings::getTUIOPort()
-{
-    return getInstance()->tPort;
-}
-
 int HTAppSettings::getReceiverPort()
 {
     return getInstance()->rPort;
@@ -168,7 +120,7 @@ int HTAppSettings::getReceiverPort()
 
 bool HTAppSettings::useTUIO()
 {
-    return getInstance()->useT;
+    return (getInstance()->tuioServers.size() != 0);
 }
 
 bool HTAppSettings::useSender()
@@ -229,4 +181,9 @@ float HTAppSettings::getRadiusClick()
 float HTAppSettings::getRadiusDrag()
 {
     return getInstance()->rDrag;
+}
+
+const std::vector<HTAppSettings::TUIOServerData>& HTAppSettings::getTUIOServers()
+{
+    return getInstance()->tuioServers;
 }

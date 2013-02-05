@@ -7,7 +7,6 @@
 #include <unistd.h>
 #include "HTMutex.h"
 
-
 #include "HTNetworkSender.h"
 #include "HTNetworkReceiver.h"
 #include "HTTUIOServer.h"
@@ -42,7 +41,7 @@ private:
 
     HTNetworkSender* sender;
     HTNetworkReceiver* recv;
-    HTTUIOServer* tuioServer;
+    std::vector<HTTUIOServer*> tuioServers;
     float winW, winH;
 
 };

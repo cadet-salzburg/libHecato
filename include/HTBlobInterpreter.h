@@ -76,7 +76,9 @@ public:
 		float expectX;
 		//!Used by HTBlobInterpreter internally.
 		float expectY;
+		//!Determines whether the current record is a person or a hand track
 		HTIBlobResultTarget::BlobResultType brtype;
+		//!The filter used with this track to smooth the trajectory. You don't need to use this normally.
 		HTKalmanFilter* filter;
 	};
 

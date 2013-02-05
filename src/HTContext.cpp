@@ -33,7 +33,7 @@ void HTContext::updateAll()
     HTContext* inst = getInstance();
     if (!inst->initialized)
     {
-        printf("HTCONTEXT: Not initialized! Call initialize() first!\n");
+        printf("HTCONTEXT: Not initialized (no cams found?)! Call initialize() first!\n");
         return;
     }
     inst->ctx->WaitAndUpdateAll();

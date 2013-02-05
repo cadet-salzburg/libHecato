@@ -8,8 +8,7 @@ HTApp::HTApp() : sf::RenderWindow(sf::VideoMode(1920, 480), "HTApp"),
                                    circle(15.f),
                                    rectShape(sf::Vector2f(4.f, getSize().y)),
                                    sender(0),
-                                   recv(0),
-                                   tuioServer(0)
+                                   recv(0)
 {
     printf("=====\nHTAPP\n=====\n");
     sf::Vector2u winDim = getSize();
@@ -39,19 +38,24 @@ HTApp::HTApp() : sf::RenderWindow(sf::VideoMode(1920, 480), "HTApp"),
 
     if (HTAppSettings::useTUIO())
     {
-        printf("Using TUIO...\n");
-        tuioServer = new HTTUIOServer();
-        tuioServer->setupConnection(HTAppSettings::getTUIOHost(), HTAppSettings::getTUIOPort());
-        tuioServer->setMargins(HTAppSettings::getLeftMargin(), HTAppSettings::getRightMargin());
+        const std::vector<HTAppSettings::TUIOServerData>& tServers = HTAppSettings::getTUIOServers();
+        printf("Using TUIO... (%lu servers)\n", tServers.size());
+        for (unsigned int i = 0; i < tServers.size(); i++)
+        {
+            HTTUIOServer* tuioServer;
+            tuioServer = new HTTUIOServer();
+            tuioServer->setupConnection(tServers[i].host.c_str(), tServers[i].port);
+            tuioServer->setMargins(HTAppSettings::getLeftMargin(), HTAppSettings::getRightMargin());
+            tuioServers.push_back(tuioServer);
+        }
     }
     else
     {
         printf("TUIO: OFF.\n");
     }
-    printf("Initializing HTContext...");
     HTContext::initialize();
     const std::vector<HTDeviceThreaded*>& devs = HTContext::getDevices();
-    printf("found %lu devices.\n", devs.size());
+    printf("Initializing HTContext...found %lu devices.\n", devs.size());
     for (unsigned int i = 0; i < devs.size(); i++)
     {
         HTDeviceThreaded* k = devs[i];
@@ -80,8 +84,12 @@ HTApp::~HTApp()
         delete sender;
     if (recv)
         delete recv;
-    if (tuioServer)
-        delete tuioServer;
+
+    for (unsigned int i = 0; i < tuioServers.size(); i++)
+    {
+        delete tuioServers[i];
+    }
+
     HTContext::shutdown();
 }
 
@@ -155,8 +163,12 @@ void HTApp::handleEvents(const std::vector<HTBlobInterpreter::TrackRecord>& even
 
     }
 	drawMutti.unlock();
-    if (tuioServer)
-        tuioServer->handleEvents(events);
+
+	const unsigned int tlen = tuioServers.size();
+	for (unsigned int i = 0; i < tlen; i++)
+    {
+        tuioServers[i]->handleEvents(events);
+    }
 }
 
 void HTApp::handleBlobResult(std::vector<HTIBlobResultTarget::SBlobResult>& points, int id)

@@ -27,7 +27,7 @@ public:
 	//!Set a margin for the tracking region
 	/**Some setups may require to set a margin. This is the case when e.g. the visualization is for
 	some reason bigger than the tracking area, you'd want to set up a space to the left and right
-	that is excluded from tracking without havin to adapt the visualization's code. This basically
+	that is excluded from tracking without having to adapt the visualization's code. This basically
 	modifies the horizontal span in which the tracking's values are valid.
 	Use the relative vals, for example, if you want to have a margin of a quarter from the left and
 	from the right, use setMargins(0.25f, 0.75f);
