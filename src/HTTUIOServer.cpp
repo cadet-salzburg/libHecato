@@ -99,7 +99,7 @@ void HTTUIOServer::handleEvents(const std::vector<HTBlobInterpreter::TrackRecord
 
 			printf("CUR %f, %f\n", cX, cY);
 
-			//tuioServer->updateTuioCursor(curIter->second.cursor, cX, cY);
+			tuioServer->updateTuioCursor(curIter->second.cursor, cX, cY);
 			break;
 
 		case HTBlobInterpreter::HTET_DRAG_OFF:
