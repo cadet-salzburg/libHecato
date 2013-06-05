@@ -102,7 +102,7 @@ void HTApp::lockAndDrawAll()
 {
 	drawMutti.lock();
 	char suffix[16] = {0};
-	std::string drawInfo;
+	sf::String drawInfo;
 	drawInfo = "TUIO    : ";
 	HTAppSettings::useTUIO() ? drawInfo += "YES\n" : drawInfo += "NO\n";
 	drawInfo += "SENDER  : ";
@@ -114,7 +114,8 @@ void HTApp::lockAndDrawAll()
 	drawInfo += "Registered Generators: ";
 	sprintf(suffix, "%u", getNumGenerators());
 	drawInfo += suffix;
-	sf::Text infoText(drawInfo);
+	sf::Text infoText;
+	infoText.setString(drawInfo);
 	infoText.setCharacterSize(15);
 	infoText.setPosition(10, 10);
 	draw(infoText);
@@ -130,7 +131,8 @@ void HTApp::lockAndDrawAll()
             circle.setPosition(drawBlobs[i].vec);
             draw(circle);
             sf::String str(blobid);
-            sf::Text t(str);
+            sf::Text t;
+            t.setString(str);
             t.setCharacterSize(20);
             t.setPosition(drawBlobs[i].vec.x, drawBlobs[i].vec.y+30.f);
             draw(t);
