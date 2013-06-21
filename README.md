@@ -38,11 +38,13 @@ The framework includes two applications for calibrating (HTCalibration) and for 
 usually suffice for not too specific tasks. In this case, no programming experience is needed to use 
 libHecato.
 
-Documentation
--------------
+Documentation / Tutorial
+------------------------
 Find the doxy here:
 http://www.socialnerds.org/polylux/libHecato
 Might not always be the super-latest version, you'll find your own doxyfile under /doc
+I recently did a how-to for the project "Connecting Cities" - go there if you get stuck at 
+some point: http://www.aec.at/connectingcities/?p=466
 
 License
 -------
