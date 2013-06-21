@@ -157,7 +157,12 @@ void HTBlobInterpreter::handleBlobResult(std::vector<HTIBlobResultTarget::SBlobR
 		if (!handled)
 		{
 			unsigned newPos = 0;
-			for (;records[newPos].confidence != 0; ++newPos);
+			for (;newPos < BLOB_LIST_SIZE && records[newPos].confidence != 0; ++newPos);
+			if (newPos == BLOB_LIST_SIZE)
+            {
+                printf("No space left to create new track! (BLOB_LIST_SIZE)\n");
+                continue;
+            }
 			//new event
 			TrackRecord& b = records[newPos];
 			b.blobID = ++blobID;
